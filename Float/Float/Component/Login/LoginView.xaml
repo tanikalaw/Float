@@ -1,0 +1,429 @@
+﻿<Window
+    x:Class="Float.Component.Login.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="clr-namespace:Float.Helper"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Float.Components.Login"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LoginView"
+    Width="1000"
+    Height="600"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <local:LoginViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <helper:Converter x:Key="MultipleConverter" />
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding EnterCommandToChooseCommand}">
+            <KeyBinding.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultipleConverter}">
+                    <Binding ElementName="PasswordBoxLogin" />
+                    <Binding ElementName="passwordBoxSignUp" />
+                </MultiBinding>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
+    </Window.InputBindings>
+
+    <Viewbox Stretch="Fill">
+        <Grid Width="1920" Height="1080">
+            <Border Background="{StaticResource DARK BLUE}" CornerRadius="25">
+                <Grid>
+                    <Border
+                        Margin="10,10,10,10"
+                        Background="White"
+                        CornerRadius="25">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSignUpClicked}" Value="false">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid Margin="15,10,0,10">
+                            <Grid.Background>
+                                <ImageBrush
+                                    AlignmentX="Left"
+                                    AlignmentY="Bottom"
+                                    ImageSource="{StaticResource Login}"
+                                    Stretch="Uniform" />
+                            </Grid.Background>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid
+                                Grid.Column="1"
+                                Width="500"
+                                Height="800"
+                                Margin="150,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    FontSize="90"
+                                    Foreground="{StaticResource Color3}"
+                                    Style="{StaticResource HeaderText1}"
+                                    Text="Sign in" />
+                                <StackPanel Margin="0,160,0,0" Orientation="Vertical">
+                                    <StackPanel
+                                        Height="150"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Margin="20,0,0,10"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Login, email or phone number"
+                                            TextAlignment="Left" />
+                                        <TextBox
+                                            Width="500"
+                                            Height="70"
+                                            FontSize="25"
+                                            Style="{StaticResource TextboxStyle1}"
+                                            Tag="Enter Username"
+                                            Text="{Binding LoginModel.UserUsername, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+
+                                    <StackPanel>
+                                        <TextBlock
+                                            Margin="20,0,0,5"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Password"
+                                            TextAlignment="Left" />
+                                        <PasswordBox
+                                            x:Name="PasswordBoxLogin"
+                                            Width="500"
+                                            Height="70"
+                                            FontSize="25"
+                                            Style="{StaticResource PasswordBox1}"
+                                            Tag="Enter Password">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="PasswordChanged">
+                                                    <i:InvokeCommandAction Command="{Binding OnUserPasswordChangeCommand}" CommandParameter="{Binding ElementName=PasswordBoxLogin}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </PasswordBox>
+                                    </StackPanel>
+                                    <Button
+                                        Width="390"
+                                        Height="70"
+                                        Margin="0,30,0,0"
+                                        Command="{Binding UserLoginCommand}"
+                                        CommandParameter="{Binding ElementName=PasswordBoxLogin}"
+                                        Content="Sign in"
+                                        FocusVisualStyle="{x:Null}"
+                                        FontSize="25"
+                                        IsTabStop="True">
+                                        <Button.Style>
+                                            <Style BasedOn="{StaticResource ButtonStyle1}" TargetType="{x:Type Button}">
+                                                <Setter Property="IsEnabled" Value="false" />
+                                                <Setter Property="Background" Value="Gray" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding LoginModel.HasMetRequirements}" Value="true">
+                                                        <Setter Property="IsEnabled" Value="True" />
+                                                        <Setter Property="Background" Value="{StaticResource Color2}" />
+                                                        <Setter Property="Foreground" Value="White" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <StackPanel
+                                        Width="450"
+                                        Margin="0,20,0,20"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Line
+                                            Margin="10,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Stroke="Black"
+                                            X1="150" />
+                                        <TextBlock
+                                            FontSize="20"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="or login with" />
+                                        <Line
+                                            Margin="10,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Stroke="Black"
+                                            X1="150" />
+                                    </StackPanel>
+                                    <Button
+                                        Width="100"
+                                        Height="100"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Cursor="Hand"
+                                        Style="{StaticResource ButtonIconStyle}">
+                                        <Border
+                                            BorderBrush="Gray"
+                                            BorderThickness="2"
+                                            CornerRadius="10">
+                                            <ContentControl
+                                                Width="80"
+                                                Height="80"
+                                                Style="{StaticResource GoogleFlat}" />
+                                        </Border>
+                                    </Button>
+                                    <StackPanel
+                                        Margin="0,20,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Margin="0,1,10,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            FontWeight="Medium"
+                                            LineHeight="Auto"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Don't have an account?" />
+
+                                        <Button
+                                            Width="200"
+                                            Command="{Binding SignUpCommand}"
+                                            CommandParameter="{Binding ElementName=PasswordBoxLogin}"
+                                            Content="Create new one."
+                                            FontSize="25"
+                                            FontWeight="Medium"
+                                            Foreground="Orange">
+                                            <Button.Style>
+                                                <Style BasedOn="{StaticResource ButtonStyle2}" TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSignUpClicked}" Value="false">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsSignUpClicked}" Value="true">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        Margin="10,10,10,10"
+                        Background="White"
+                        CornerRadius="25">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSignUpClicked}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid Margin="15,10,0,10">
+                            <Grid.Background>
+                                <ImageBrush
+                                    AlignmentX="Left"
+                                    AlignmentY="Bottom"
+                                    ImageSource="{StaticResource SignUp}"
+                                    Stretch="Uniform" />
+                            </Grid.Background>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid
+                                Grid.Column="1"
+                                Width="500"
+                                Height="800"
+                                Margin="150,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    FontSize="90"
+                                    Foreground="{StaticResource Color3}"
+                                    Style="{StaticResource HeaderText1}"
+                                    Text="Sign up" />
+                                <StackPanel Margin="0,160,0,0" Orientation="Vertical">
+                                    <StackPanel
+                                        Height="150"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Margin="20,0,0,10"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Sign up, email or phone number"
+                                            TextAlignment="Left" />
+                                        <TextBox
+                                            Width="500"
+                                            Height="70"
+                                            FontSize="25"
+                                            Style="{StaticResource TextboxStyle1}"
+                                            Tag="Enter Username"
+                                            Text="{Binding LoginModel.UserUsername, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
+
+                                    <StackPanel>
+                                        <TextBlock
+                                            Margin="20,0,0,5"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Password"
+                                            TextAlignment="Left" />
+                                        <PasswordBox
+                                            x:Name="PasswordBoxSignup"
+                                            Width="500"
+                                            Height="70"
+                                            FontSize="25"
+                                            Style="{StaticResource PasswordBox1}"
+                                            Tag="Enter Password">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="PasswordChanged">
+                                                    <i:InvokeCommandAction Command="{Binding OnUserPasswordChangeCommand}" CommandParameter="{Binding ElementName=PasswordBoxLogin}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </PasswordBox>
+                                    </StackPanel>
+                                    <Button
+                                        Width="390"
+                                        Height="70"
+                                        Margin="0,30,0,0"
+                                        Command="{Binding UserLoginCommand}"
+                                        CommandParameter="{Binding ElementName=PasswordBoxSignup}"
+                                        Content="Sign up"
+                                        FocusVisualStyle="{x:Null}"
+                                        FontSize="25"
+                                        IsTabStop="True">
+                                        <Button.Style>
+                                            <Style BasedOn="{StaticResource ButtonStyle1}" TargetType="{x:Type Button}">
+                                                <Setter Property="IsEnabled" Value="false" />
+                                                <Setter Property="Background" Value="Gray" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding LoginModel.HasMetRequirements}" Value="true">
+                                                        <Setter Property="IsEnabled" Value="True" />
+                                                        <Setter Property="Background" Value="{StaticResource Color2}" />
+                                                        <Setter Property="Foreground" Value="White" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <StackPanel
+                                        Width="450"
+                                        Margin="0,20,0,20"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Line
+                                            Margin="10,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Stroke="Black"
+                                            X1="150" />
+                                        <TextBlock
+                                            FontSize="20"
+                                            Foreground="{StaticResource Color3}"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="or sign up with" />
+                                        <Line
+                                            Margin="10,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Stroke="Black"
+                                            X1="150" />
+                                    </StackPanel>
+                                    <Button
+                                        Width="100"
+                                        Height="100"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Cursor="Hand"
+                                        Style="{StaticResource ButtonIconStyle}">
+                                        <Border
+                                            BorderBrush="Gray"
+                                            BorderThickness="2"
+                                            CornerRadius="10">
+                                            <ContentControl
+                                                Width="80"
+                                                Height="80"
+                                                Style="{StaticResource GoogleFlat}" />
+                                        </Border>
+                                    </Button>
+                                    <StackPanel
+                                        Margin="0,20,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Margin="0,1,10,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="25"
+                                            FontWeight="Medium"
+                                            LineHeight="Auto"
+                                            Style="{StaticResource Pharagraph1}"
+                                            Text="Already have an account?" />
+
+                                        <Button
+                                            Width="100"
+                                            Command="{Binding SignInCommand}"
+                                            CommandParameter="{Binding ElementName=PasswordBoxSignup}"
+                                            Content="Sign up"
+                                            FontSize="25"
+                                            FontWeight="Medium"
+                                            Foreground="Orange">
+                                            <Button.Style>
+                                                <Style BasedOn="{StaticResource ButtonStyle2}" TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSignUpClicked}" Value="true">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsSignUpClicked}" Value="true">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Viewbox>
+</Window>
