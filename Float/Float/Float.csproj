@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -183,10 +185,6 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{bf26b10c-ca37-4bf5-be7a-bb9104f9df12}</Project>
       <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FloatResources\FloatResources.csproj">
-      <Project>{facec303-7b15-40d2-8bd4-27db168e3a9b}</Project>
-      <Name>FloatResources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
