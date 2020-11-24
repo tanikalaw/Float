@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:FloatResources">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/ButtonStyle.xaml" />
+        <ResourceDictionary Source="Styles/IconStyle.xaml" />
+        <ResourceDictionary Source="Styles/TextBlockStyle.xaml" />
+        <ResourceDictionary Source="Styles/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="Styles/ColorResource.xaml" />
+        <ResourceDictionary Source="Resources/FontsResource.xaml" />
+        <ResourceDictionary Source="Resources/ImageResources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -1,18 +1,17 @@
-﻿using Float;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simpleCRUD.Startup
+namespace Float.Startup
 {
-    public class Startup
+   public class Startup
     {
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
-            App app = new App();
+            Float.App app = new Float.App();
             app.InitializeComponent();
             app.Run();
         }

@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <FontFamily x:Key="VolkSwagen">\Resources\Fonts\#Volkswagen-Serial</FontFamily>
+    <FontFamily x:Key="QuickSand">\Resources\Fonts\#Quicksand</FontFamily>
+    <FontFamily x:Key="Quinta">\Resources\Fonts\#Bw Quinta Pro</FontFamily>
+    <FontFamily x:Key="Roboto">\Resources\Fonts\#Roboto</FontFamily>
+
+</ResourceDictionary>
