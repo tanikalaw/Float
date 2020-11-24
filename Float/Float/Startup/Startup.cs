@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Float.Component.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace Float.Startup
 {
-   public class Startup
+    class Startup
     {
         [STAThread]
-        public static void Main(string[] args)
+         static void Main()
         {
-            Float.App app = new Float.App();
+            App app = new App();
             app.InitializeComponent();
             app.Run();
+
+           
         }
     }
 }

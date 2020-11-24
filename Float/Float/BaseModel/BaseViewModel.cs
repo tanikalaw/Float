@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simpleCRUD.BaseModel
+namespace Float.BaseModel
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
@@ -13,11 +13,6 @@ namespace simpleCRUD.BaseModel
 
         public BaseViewModel()
         {
-
-
-
-
-
 
         }
     

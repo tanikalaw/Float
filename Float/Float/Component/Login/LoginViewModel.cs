@@ -1,7 +1,6 @@
-﻿using Float;
+﻿using Float.BaseModel;
 using Float.Component.Dashboard;
 using Float.Component.Login;
-using simpleCRUD.BaseModel;
 using simpleCRUD.Command;
 using simpleCRUD.Services;
 using System;

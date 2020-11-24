@@ -1,9 +1,5 @@
-﻿using simpleCRUD.BaseModel;
-using System;
-using System.Collections.Generic;
+﻿using Float.BaseModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Float.Components.Login
