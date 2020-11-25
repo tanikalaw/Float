@@ -1,8 +1,8 @@
 ﻿using Float.BaseModel;
 using Float.Component.Dashboard;
 using Float.Component.Login;
+using Float.Services;
 using simpleCRUD.Command;
-using simpleCRUD.Services;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -126,10 +126,10 @@ namespace Float.Components.Login
             MemberService memberService = new MemberService();
             bool result = memberService.SearchMember(LoginModel.UserUsername, LoginModel.UserPassword);
 
-            //if (result)
-            //    MessageBox.Show($"Login Success! {LoginModel.UserUsername} and {LoginModel.UserPassword}");
-            //else
-            //    throw new Exception();
+            if (result)
+                MessageBox.Show($"Login Success! {LoginModel.UserUsername} and {LoginModel.UserPassword}");
+            else
+                throw new Exception();
             ClearFields();
 
             MainDashboard mainDashboard = new MainDashboard();

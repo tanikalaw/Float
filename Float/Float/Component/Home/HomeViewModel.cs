@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Float.Components.Dashboard
+namespace Float.Component.Home
 {
-    public class MainDashboardViewModel
+    class HomeViewModel
     {
-
-
     }
 }

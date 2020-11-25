@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace simpleCRUD.Services.IServices
+namespace Float.Services.IServices
 {
     public interface IMemberService
     {
