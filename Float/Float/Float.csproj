@@ -119,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Component\Home\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Home\HomeViewModel.cs" />
     <Compile Include="Component\Login\LoginModel.cs" />
     <Compile Include="Component\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -129,6 +133,10 @@
     <Compile Include="ServiceProvider\MemberService.cs" />
     <Compile Include="Startup\Startup.cs" />
     <Page Include="Component\Dashboard\MainDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Home\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
