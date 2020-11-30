@@ -49,6 +49,7 @@
                                 Height="50"
                                 Margin="0,20,10,20"
                                 Background="{StaticResource DARK BLUE}"
+                                Command="{Binding OpenHomeControlCommand}"
                                 Content="Home"
                                 FontFamily="{StaticResource Roboto}"
                                 FontSize="18"
@@ -112,7 +113,7 @@
                         Grid.Column="1"
                         Background="#FEF6F3"
                         CornerRadius="50">
-                        <ItemsControl>
+                        <ItemsControl ItemsSource="{Binding ShowRightUserControls}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="Auto" Height="Auto" />
