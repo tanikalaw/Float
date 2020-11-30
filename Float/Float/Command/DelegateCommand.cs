@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace simpleCRUD.Command
+namespace Float.Command
 {
     public class DelegateCommand : ICommand
     {
