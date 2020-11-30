@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Float.Component.Home
 {
-    class HomeViewModel
+   public class HomeViewModel
     {
     }
 }
