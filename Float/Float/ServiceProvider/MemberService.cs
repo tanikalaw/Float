@@ -6,6 +6,9 @@ using DataAccess;
 using System.Threading.Tasks;
 using Float.DataModels;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Windows;
+using System.Collections.Generic;
 
 namespace Float.Services
 {
@@ -13,28 +16,18 @@ namespace Float.Services
     {
         public async Task<string> RegisterUserAsync(SignupDataModel data)
         {
-            try
-            {
-                using (HttpResponseMessage response = await 
-                    HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.GetSignupResource(), data))
-                {
-                    response.EnsureSuccessStatusCode();
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return response.RequestMessage.ToString();
-                    }
+            using (HttpResponseMessage response = await HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.GetSignupResource(), data))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsStringAsync().Result;
+                }
+                else
+                {
+                    return response.Content.ReadAsStringAsync().Result;
                 }
             }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-
-            return string.Empty;
-
-
-            //using (MySqlConnection connection = OperateDb.GetConnection())
             //{
             //    connection.Open();
             //    var query = "INSERT INTO logindata (username,password) VALUES (@username, @password)";
