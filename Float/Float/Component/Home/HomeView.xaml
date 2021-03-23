@@ -1,0 +1,415 @@
+﻿<UserControl
+    x:Class="Float.Component.Home.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Float.Component.Home"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1080"
+    d:DesignWidth="1900"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:HomeViewModel />
+    </UserControl.DataContext>
+    <Grid Margin="10,20,10,10" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.RowSpan="2"
+            Height="1010"
+            Margin="0,0,10,0"
+            Background="White"
+            CornerRadius="50">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="20">
+                    <Grid
+                        Height="50"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Top">
+                        <TextBlock
+                            Width="200"
+                            HorizontalAlignment="Left"
+                            FontSize="18"
+                            LineHeight="Auto"
+                            Style="{StaticResource HeaderText1}"
+                            Text="OrderNumber" />
+                        <Button
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,20,0"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ButtonIconRoundedStyle}">
+                            <Path
+                                Width="10"
+                                Height="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{StaticResource CloseIcon}"
+                                Fill="white"
+                                Stretch="Fill" />
+                        </Button>
+                        <TextBlock
+                            Width="100"
+                            Height="20"
+                            Margin="0,30,0,0"
+                            HorizontalAlignment="Left"
+                            LineHeight="Auto"
+                            Style="{StaticResource Pharagraph1}"
+                            Text="OrderDate" />
+                    </Grid>
+
+                    <Grid Height="80" Margin="0,40,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Path
+                                        Width="15"
+                                        Height="15"
+                                        HorizontalAlignment="Left"
+                                        Data="{StaticResource BoxIcon}"
+                                        Fill="{StaticResource French Gray}"
+                                        Stretch="Uniform" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="From"
+                                        TextAlignment="Justify" />
+
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="To"
+                                        TextAlignment="Center" />
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Path
+                                        Width="15"
+                                        Height="15"
+                                        HorizontalAlignment="Left"
+                                        Data="{StaticResource BoxIcon}"
+                                        Fill="{StaticResource French Gray}"
+                                        Stretch="Uniform" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="To"
+                                        TextAlignment="Justify" />
+
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="From"
+                                        TextAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+                            <Line
+                                VerticalAlignment="Bottom"
+                                Stroke="Gray"
+                                StrokeThickness=".5"
+                                X1="300" />
+                            <Grid Grid.Column="1">
+                                <Line
+                                    VerticalAlignment="Bottom"
+                                    Stroke="Gray"
+                                    StrokeThickness=".5"
+                                    Y1="100" />
+                                <Line
+                                    VerticalAlignment="Bottom"
+                                    Stroke="Gray"
+                                    StrokeThickness=".5"
+                                    X1="150" />
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="Time Arrival" />
+
+                            </Grid>
+
+
+                        </Grid>
+                    </Grid>
+
+                    <Grid Height="200">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+                            <ItemsControl ItemsSource="{Binding Orders}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border CornerRadius="20">
+                                                <Border.Background>
+                                                    <ImageBrush ImageSource="{Binding Image}" />
+                                                </Border.Background>
+                                            </Border>
+
+                                            <TextBlock Grid.Column="1" Text="Item Name" />
+                                            <TextBlock Grid.Column="2" Text="Number of PCs" />
+                                            <TextBlock Grid.Column="3" Text="Cost" />
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <Line
+                            VerticalAlignment="Bottom"
+                            Stroke="Gray"
+                            StrokeThickness="1"
+                            X1="3000" />
+                    </Grid>
+
+                    <TextBlock HorizontalAlignment="Right" Text="Total Items" />
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Border
+                        Height="400"
+                        Margin="10,0,10,10"
+                        VerticalAlignment="Bottom"
+                        Background="{StaticResource SELAGO}"
+                        CornerRadius="50">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Margin="15">
+                                <TextBlock
+                                    Width="200"
+                                    Height="40"
+                                    Margin="10,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    LineHeight="Auto"
+                                    Style="{StaticResource HeaderText1}"
+                                    Text="Customer name" />
+                                <TextBlock
+                                    Width="200"
+                                    Height="30"
+                                    Margin="10,60,0,0"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Gray"
+                                    LineHeight="Auto"
+                                    Style="{StaticResource SubText}">
+                                    <Run Text="Active status" />
+                                    <Run Text="*" />
+                                    <Run Text="Status" />
+                                </TextBlock>
+
+                                <Grid>
+                                    <Button
+                                        Width="50"
+                                        Height="50"
+                                        Margin="0,30,100,0"
+                                        HorizontalAlignment="Right"
+                                        Content="Notification" />
+                                    <Button
+                                        Width="50"
+                                        Height="50"
+                                        Margin="0,30,20,0"
+                                        HorizontalAlignment="Right"
+                                        Content="Message" />
+                                </Grid>
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border
+                                        Width="120"
+                                        Height="170"
+                                        Margin="50,0,10,30"
+                                        Background="{StaticResource Link Water}"
+                                        CornerRadius="20">
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource DistanceIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
+
+                                    </Border>
+                                    <Border
+                                        Width="120"
+                                        Height="170"
+                                        Margin="0,0,0,30"
+                                        Background="{StaticResource Link Water}"
+                                        CornerRadius="20">
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource ClockIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
+
+                                    </Border>
+                                    <Border
+                                        Width="120"
+                                        Height="170"
+                                        Margin="10,0,30,30"
+                                        Background="{StaticResource Link Water}"
+                                        CornerRadius="20">
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource BoxIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
+
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Ellipse
+                        Width="130"
+                        Height="140"
+                        Margin="40,30,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Fill="Beige">
+                        <!--<Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding Image}" />
+                        </Ellipse.Fill>-->
+                    </Ellipse>
+                </Grid>
+            </Grid>
+
+
+        </Border>
+
+        <Border
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Height="1010"
+            Background="Green"
+            CornerRadius="50">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ItemsControl ItemsSource="{Binding OrdersToShow}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{StaticResource Login}" />
+                                </Border.Background>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+
+                <Border
+                    Grid.Column="1"
+                    Background="{StaticResource French Gray}"
+                    CornerRadius="50" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

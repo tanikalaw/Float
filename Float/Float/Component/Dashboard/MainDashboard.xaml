@@ -49,6 +49,7 @@
                                 Height="50"
                                 Margin="0,20,10,20"
                                 Background="{StaticResource DARK BLUE}"
+                                Command="{Binding OpenHomeControlCommand}"
                                 Content="Home"
                                 FontFamily="{StaticResource Roboto}"
                                 FontSize="18"
@@ -112,24 +113,13 @@
                         Grid.Column="1"
                         Background="#FEF6F3"
                         CornerRadius="50">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="500" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border
-                                Height="1010"
-                                Margin="10,0,0,0"
-                                Background="White"
-                                CornerRadius="50" />
-                            <Border
-                                Grid.Column="1"
-                                Height="1010"
-                                Margin="10,0,10,0"
-                                Background="White"
-                                CornerRadius="50" />
-                        </Grid>
+                        <ItemsControl ItemsSource="{Binding ShowRightUserControls}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" Height="Auto" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Border>
                 </Grid>
             </Grid>

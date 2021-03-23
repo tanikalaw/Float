@@ -1,9 +1,15 @@
-﻿using Float.BaseModel;
+﻿using DataAccess;
+using Float.BaseModel;
+using Float.Command;
 using Float.Component.Dashboard;
 using Float.Component.Login;
-using simpleCRUD.Command;
-using simpleCRUD.Services;
+using Float.DataModels;
+using Float.GenericErrorMessage;
+using Float.Services;
 using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,10 +19,11 @@ namespace Float.Components.Login
     public class LoginViewModel : BaseViewModel
     {
         LoginView loginView;
+        GenericErrorMessageViewModel window = new GenericErrorMessageViewModel();
         public LoginViewModel()
         {
-          
             Initialize();
+            HttpClientHelper.InitializeClient();
         }
 
         private LoginModel loginModel;
@@ -72,7 +79,7 @@ namespace Float.Components.Login
         {
             get
             {
-                return new DelegateCommand(UserSignUp);
+                return new DelegateCommand<object>(UserSignUp);
             }
         }
 
@@ -92,7 +99,6 @@ namespace Float.Components.Login
             }
         }
         #endregion
-
 
         #region Methods
 
@@ -126,10 +132,7 @@ namespace Float.Components.Login
             MemberService memberService = new MemberService();
             bool result = memberService.SearchMember(LoginModel.UserUsername, LoginModel.UserPassword);
 
-            //if (result)
-            //    MessageBox.Show($"Login Success! {LoginModel.UserUsername} and {LoginModel.UserPassword}");
-            //else
-            //    throw new Exception();
+
             ClearFields();
 
             MainDashboard mainDashboard = new MainDashboard();
@@ -139,33 +142,46 @@ namespace Float.Components.Login
             mainDashboard.ShowDialog();
         }
 
-        private void UserSignUp()
+        private async void UserSignUp(object parameter)
         {
+            PasswordBox passwordBox = parameter as PasswordBox;
             MemberService memberService = new MemberService();
+            SignupDataModel signup = new SignupDataModel();
 
-            bool result = memberService.AddMember(LoginModel.UserUsername, LoginModel.UserPassword);
+            signup.Username = LoginModel.UserUsername;
+            signup.Password = LoginModel.UserPassword;
 
-            if (result)
-                MessageBox.Show($"Sign up Success! {LoginModel.UserUsername} and {LoginModel.UserPassword}");
-            else
-                throw new Exception();
-            ClearFields();
+            try
+            {
+                var result = await memberService.RegisterUserAsync(signup);
+
+                GenericErrorMessageView genericWindow = new GenericErrorMessageView();
+                genericWindow.Owner = App.Current.MainWindow;
+
+                genericWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                GenericErrorMessageView genericWindow = new GenericErrorMessageView();
+                GenericErrorMessageViewModel genericErrorMessageViewModel = new GenericErrorMessageViewModel();
+                genericErrorMessageViewModel.ErrorMessage = ex.Message;
+                genericWindow.ShowDialog();
+            }
+            passwordBox?.Clear();
+            loginModel.UserUsername = string.Empty;
         }
 
         private void ClearFields()
         {
             loginModel.UserUsername = string.Empty;
-            LoginModel.UserPassword = string.Empty;
         }
 
         private void EnterCommandToChoose(object[] pb)
         {
-
-            if (IsSignUpClicked)
-                UserSignUp();
-            else
-                UserLogin();
-
+            UserLogin();
+            //if (IsSignUpClicked)
+            //    //UserSignUp();
+            //else
 
             for (int i = 0; i < pb.Length; i++)
             {
@@ -182,7 +198,6 @@ namespace Float.Components.Login
                 return true;
         }
 
-      
         #endregion
     }
 }
