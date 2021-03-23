@@ -5,11 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Float.Component.Home"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="1060"
+    d:DesignHeight="1080"
     d:DesignWidth="1900"
     mc:Ignorable="d">
-
-    <Grid>
+    <UserControl.DataContext>
+        <local:HomeViewModel />
+    </UserControl.DataContext>
+    <Grid Margin="10,20,10,10" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500" />
             <ColumnDefinition Width="*" />
@@ -18,7 +20,7 @@
         <Border
             Grid.RowSpan="2"
             Height="1010"
-            Margin="10,25,0,25"
+            Margin="0,0,10,0"
             Background="White"
             CornerRadius="50">
 
@@ -41,11 +43,21 @@
                             Style="{StaticResource HeaderText1}"
                             Text="OrderNumber" />
                         <Button
-                            Width="25"
-                            Height="25"
-                            Margin="0,0,5,0"
+                            Width="20"
+                            Height="20"
+                            Margin="0,0,20,0"
+                            Padding="0"
                             HorizontalAlignment="Right"
-                            Content="Hello world" />
+                            Style="{StaticResource ButtonIconRoundedStyle}">
+                            <Path
+                                Width="10"
+                                Height="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{StaticResource CloseIcon}"
+                                Fill="white"
+                                Stretch="Fill" />
+                        </Button>
                         <TextBlock
                             Width="100"
                             Height="20"
@@ -63,16 +75,77 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Grid>
-                                <TextBlock Text="From" />
-                                <TextBlock Margin="0,25,0,0" Text="To" />
-                                <Line
-                                    VerticalAlignment="Bottom"
-                                    Stroke="Gray"
-                                    StrokeThickness=".5"
-                                    X1="300" />
-                            </Grid>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Path
+                                        Width="15"
+                                        Height="15"
+                                        HorizontalAlignment="Left"
+                                        Data="{StaticResource BoxIcon}"
+                                        Fill="{StaticResource French Gray}"
+                                        Stretch="Uniform" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="From"
+                                        TextAlignment="Justify" />
 
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="To"
+                                        TextAlignment="Center" />
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Path
+                                        Width="15"
+                                        Height="15"
+                                        HorizontalAlignment="Left"
+                                        Data="{StaticResource BoxIcon}"
+                                        Fill="{StaticResource French Gray}"
+                                        Stretch="Uniform" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="To"
+                                        TextAlignment="Justify" />
+
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Height="30"
+                                        HorizontalAlignment="Left"
+                                        LineHeight="Auto"
+                                        Style="{StaticResource HeaderText1}"
+                                        Text="From"
+                                        TextAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+                            <Line
+                                VerticalAlignment="Bottom"
+                                Stroke="Gray"
+                                StrokeThickness=".5"
+                                X1="300" />
                             <Grid Grid.Column="1">
                                 <Line
                                     VerticalAlignment="Bottom"
@@ -99,7 +172,7 @@
                     <Grid Height="200">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 
-                            <ItemsControl>
+                            <ItemsControl ItemsSource="{Binding Orders}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal" />
@@ -145,7 +218,7 @@
                         Height="400"
                         Margin="10,0,10,10"
                         VerticalAlignment="Bottom"
-                        Background="Wheat"
+                        Background="{StaticResource SELAGO}"
                         CornerRadius="50">
                         <Grid>
 
@@ -157,14 +230,20 @@
                             <Grid Margin="15">
                                 <TextBlock
                                     Width="200"
-                                    Margin="10,80,0,0"
+                                    Height="40"
+                                    Margin="10,10,0,0"
                                     HorizontalAlignment="Left"
+                                    LineHeight="Auto"
+                                    Style="{StaticResource HeaderText1}"
                                     Text="Customer name" />
                                 <TextBlock
                                     Width="200"
-                                    Margin="10,100,0,0"
+                                    Height="30"
+                                    Margin="10,60,0,0"
                                     HorizontalAlignment="Left"
-                                    LineHeight="Auto">
+                                    Foreground="Gray"
+                                    LineHeight="Auto"
+                                    Style="{StaticResource SubText}">
                                     <Run Text="Active status" />
                                     <Run Text="*" />
                                     <Run Text="Status" />
@@ -192,34 +271,96 @@
                                         Width="120"
                                         Height="170"
                                         Margin="50,0,10,30"
-                                        Background="SkyBlue"
+                                        Background="{StaticResource Link Water}"
                                         CornerRadius="20">
-                                        <TextBlock Text="Distance" />
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource DistanceIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
 
                                     </Border>
                                     <Border
                                         Width="120"
                                         Height="170"
                                         Margin="0,0,0,30"
-                                        Background="SkyBlue"
+                                        Background="{StaticResource Link Water}"
                                         CornerRadius="20">
-                                        <TextBlock Text="Left time" />
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource ClockIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
+
                                     </Border>
                                     <Border
                                         Width="120"
                                         Height="170"
                                         Margin="10,0,30,30"
-                                        Background="SkyBlue"
+                                        Background="{StaticResource Link Water}"
                                         CornerRadius="20">
-                                        <TextBlock Text="Way of Delivery" />
+                                        <StackPanel Height="170" VerticalAlignment="Center">
+                                            <Path
+                                                Width="25"
+                                                Height="25"
+                                                Margin="0,30,0,0"
+                                                Data="{StaticResource BoxIcon}"
+                                                Fill="{StaticResource Sail}"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Margin="0,40,0,0"
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource HeaderText1}"
+                                                Text="Scooter" />
+                                            <TextBlock
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Gray"
+                                                Style="{StaticResource SubText}"
+                                                Text="Way of Delivery" />
+
+                                        </StackPanel>
+
                                     </Border>
                                 </StackPanel>
                             </Grid>
                         </Grid>
                     </Border>
                     <Ellipse
-                        Width="150"
-                        Height="150"
+                        Width="130"
+                        Height="140"
                         Margin="40,30,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
@@ -238,12 +379,11 @@
             Grid.RowSpan="2"
             Grid.Column="1"
             Height="1010"
-            Margin="10,25"
-            Background="White"
+            Background="Green"
             CornerRadius="50">
-            <Grid Margin="25">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
@@ -267,8 +407,7 @@
 
                 <Border
                     Grid.Column="1"
-                    Margin="20,0,0,0"
-                    Background="Green"
+                    Background="{StaticResource French Gray}"
                     CornerRadius="50" />
             </Grid>
         </Border>

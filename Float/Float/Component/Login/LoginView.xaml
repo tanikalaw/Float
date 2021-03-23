@@ -29,7 +29,6 @@
             <KeyBinding.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultipleConverter}">
                     <Binding ElementName="PasswordBoxLogin" />
-                    <Binding ElementName="passwordBoxSignUp" />
                 </MultiBinding>
             </KeyBinding.CommandParameter>
         </KeyBinding>
@@ -53,7 +52,7 @@
                             </Style>
                         </Border.Style>
 
-                        <Grid Margin="15,10,0,10">
+                        <Grid Margin="15,15,15,15">
                             <Grid.Background>
                                 <ImageBrush
                                     AlignmentX="Left"
@@ -174,8 +173,8 @@
                                             X1="150" />
                                     </StackPanel>
                                     <Button
-                                        Width="100"
-                                        Height="100"
+                                        Width="80"
+                                        Height="70"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Cursor="Hand"
@@ -185,8 +184,8 @@
                                             BorderThickness="2"
                                             CornerRadius="10">
                                             <ContentControl
-                                                Width="80"
-                                                Height="80"
+                                                  Width="50"
+                                        Height="50"
                                                 Style="{StaticResource GoogleFlat}" />
                                         </Border>
                                     </Button>
@@ -246,13 +245,13 @@
                             </Style>
                         </Border.Style>
 
-                        <Grid Margin="15,10,0,10">
+                        <Grid Margin="15,15,15,15">
                             <Grid.Background>
                                 <ImageBrush
                                     AlignmentX="Left"
                                     AlignmentY="Bottom"
-                                    ImageSource="{StaticResource SignUp}"
-                                    Stretch="Uniform" />
+                                    ImageSource="{StaticResource SignUp}" Stretch="Uniform"
+                                    />
                             </Grid.Background>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -306,13 +305,13 @@
                                         <PasswordBox
                                             x:Name="PasswordBoxSignup"
                                             Width="500"
-                                            Height="70"
+                                            Height="70" 
                                             FontSize="25"
                                             Style="{StaticResource PasswordBox1}"
                                             Tag="Enter Password">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="PasswordChanged">
-                                                    <i:InvokeCommandAction Command="{Binding OnUserPasswordChangeCommand}" CommandParameter="{Binding ElementName=PasswordBoxLogin}" />
+                                                    <i:InvokeCommandAction Command="{Binding OnUserPasswordChangeCommand}" CommandParameter="{Binding ElementName=PasswordBoxSignup}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                         </PasswordBox>
@@ -321,7 +320,7 @@
                                         Width="390"
                                         Height="70"
                                         Margin="0,30,0,0"
-                                        Command="{Binding UserLoginCommand}"
+                                        Command="{Binding UserSignUpCommand}"
                                         CommandParameter="{Binding ElementName=PasswordBoxSignup}"
                                         Content="Sign up"
                                         FocusVisualStyle="{x:Null}"
@@ -366,8 +365,8 @@
                                             X1="150" />
                                     </StackPanel>
                                     <Button
-                                        Width="100"
-                                        Height="100"
+                                        Width="80"
+                                        Height="70"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Cursor="Hand"
@@ -377,8 +376,8 @@
                                             BorderThickness="2"
                                             CornerRadius="10">
                                             <ContentControl
-                                                Width="80"
-                                                Height="80"
+                                                Width="50"
+                                                Height="50"
                                                 Style="{StaticResource GoogleFlat}" />
                                         </Border>
                                     </Button>

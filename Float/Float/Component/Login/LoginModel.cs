@@ -53,13 +53,16 @@ namespace Float.Components.Login
             }
         }
 
-        public void OnUserPasswordChanged(PasswordBox passwordBox)
+        public void OnUserPasswordChanged(object parameter)
         {
+           PasswordBox passwordBox = (PasswordBox)parameter;
             if (passwordBox.Password == string.Empty)
+            {
                 passwordBox.Tag = "Enter Password";
+                passwordBox.Password = string.Empty;
+            }
             else
                 passwordBox.Tag = string.Empty;
-
 
             UserPassword = passwordBox.Password;
         }
@@ -68,10 +71,7 @@ namespace Float.Components.Login
         {
             if(UserUsername != null && UserPassword != null)
             {
-                if (UserUsername.Count() >= 6)
-                    HasMetRequirements = true;
-
-                if (UserPassword.Count() >= 6)
+                if (UserUsername.Count() >= 6 && UserPassword.Count() >= 6)
                     HasMetRequirements = true;
                 else
                     HasMetRequirements = false;

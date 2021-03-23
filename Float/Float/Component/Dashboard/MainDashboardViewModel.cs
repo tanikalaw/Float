@@ -15,12 +15,14 @@ namespace Float.Components.Dashboard
     {
         public MainDashboardViewModel()
         {
+            HomeView = new HomeView();
             ShowRightUserControls = new ObservableCollection<object>();
+            ShowControlsOnRight(HomeView);
         }
 
         private ObservableCollection<object> showRightUserControls;
-        public ObservableCollection<object> ShowRightUserControls 
-        
+        public ObservableCollection<object> ShowRightUserControls
+
         {
             get => showRightUserControls;
             set
@@ -29,6 +31,20 @@ namespace Float.Components.Dashboard
                 RaisedPropertyChanged(nameof(ShowRightUserControls));
             }
         }
+
+        private HomeView homeView;
+        public HomeView HomeView
+
+        {
+            get => homeView;
+            set
+            {
+                homeView = value;
+                RaisedPropertyChanged(nameof(HomeView));
+            }
+        }
+
+        public int MyProperty { get; set; }
 
         public ICommand OpenHomeControlCommand => new DelegateCommand(OpenHomeControl);
 
@@ -41,8 +57,7 @@ namespace Float.Components.Dashboard
 
         private void OpenHomeControl()
         {
-            HomeView homeView = new HomeView();
-            ShowControlsOnRight(homeView);
+            ShowControlsOnRight(HomeView);
         }
     }
 }
