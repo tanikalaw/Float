@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Float.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Float.Services.IServices
 {
     public interface IMemberService
     {
-        bool AddMember(string username, string password);
+        Task<string> RegisterUserAsync(SignupDataModel data);
         bool SearchMember(string username, string password);
     }
 }

@@ -1,30 +1,54 @@
 ﻿using Float.Services.IServices;
 using System;
-using MySql.Data.MySqlClient;
-using Dapper;
 using DataAccess.DBHelper;
+using System.Net.Http;
+using DataAccess;
+using System.Threading.Tasks;
+using Float.DataModels;
+using Newtonsoft.Json;
 
 namespace Float.Services
 {
     public class MemberService : IMemberService
     {
-        public bool AddMember(string username, string password)
+        public async Task<string> RegisterUserAsync(SignupDataModel data)
         {
-            using (MySqlConnection connection = OperateDb.GetConnection())
+            try
             {
-                connection.Open();
-                var query = "INSERT INTO logindata (username,password) VALUES (@username, @password)";
+                using (HttpResponseMessage response = await 
+                    HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.GetSignupResource(), data))
+                {
+                    response.EnsureSuccessStatusCode();
 
-                var dp = new DynamicParameters();
-                dp.Add("@username", username);
-                dp.Add("@password", password);
-                int result = connection.Execute(query, dp);
-
-                if (result > 0)
-                    return true;
-                else
-                    return false;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return response.RequestMessage.ToString();
+                    }
+                }
             }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            return string.Empty;
+
+
+            //using (MySqlConnection connection = OperateDb.GetConnection())
+            //{
+            //    connection.Open();
+            //    var query = "INSERT INTO logindata (username,password) VALUES (@username, @password)";
+
+            //    var dp = new DynamicParameters();
+            //    dp.Add("@username", username);
+            //    dp.Add("@password", password);
+            //    int result = connection.Execute(query, dp);
+
+            //    if (result > 0)
+            //        return true;
+            //    else
+            //        return false;
+            //}
         }
 
         public bool SearchMember(string username, string password)
