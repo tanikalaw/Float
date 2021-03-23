@@ -8,8 +8,8 @@ namespace Float.ViewModelMediator
 {
     interface IMediator
     {
-        void Register(object vm);
-        void NotifyViewModel(string viewModel, string message, object args);
+        void Register(Action<object> callback, string message);
+        void NotifyViewModel(string message, object args);
 
     }
 }

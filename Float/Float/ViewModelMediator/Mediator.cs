@@ -7,21 +7,48 @@ using System.Threading.Tasks;
 
 namespace Float.ViewModelMediator
 {
-    public class Mediator : IMediator
+    public class Mediator : BaseViewModel
     {
 
-        
+        static readonly Mediator instance = new Mediator();
+        MultiDictionary<string, BaseViewModel> internalList = new MultiDictionary<string, BaseViewModel>();
 
-        public void NotifyViewModel(string viewModel, string message, object args)
+        static Mediator()
         {
-            throw new NotImplementedException();
+
+        }
+        public Mediator()
+        {
+
         }
 
-        public void Register(object vm)
+        public static Mediator Instance
         {
-            throw new NotImplementedException();
+            get { return instance; }
         }
 
+        public void Register(BaseViewModel viewModel, string message)
+        {
+            internalList.AddValue(message, viewModel);
+        }
 
+        public void Unregister(BaseViewModel viewModel, string message)
+        {
+            if (internalList.ContainsKey(message))
+            {
+                internalList.Remove(message);
+            }
+        }
+
+        public void NotifyViewModel(string viewModelName, string message, object args)
+        {
+            if (internalList.ContainsKey(viewModelName))
+            {
+                foreach(BaseViewModel viewModel in internalList[viewModelName])
+                {
+                    viewModel.SendData(message, args);
+                }
+            }
+        }
     }
 }

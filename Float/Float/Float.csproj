@@ -145,6 +145,8 @@
     <Compile Include="ServiceProvider\IServiceProvider\IMemberService.cs" />
     <Compile Include="ServiceProvider\MemberService.cs" />
     <Compile Include="Startup\Startup.cs" />
+    <Compile Include="ViewModelMediator\Messages.cs" />
+    <Compile Include="ViewModelMediator\MultiDictionary.cs" />
     <Page Include="Component\Dashboard\MainDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
