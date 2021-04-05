@@ -2,15 +2,13 @@
 using Float.BaseModel;
 using Float.Command;
 using Float.Component.Dashboard;
-using Float.Component.Login;
 using Float.DataModels;
-using Float.GenericErrorMessage;
+using Float.GenericMessages;
+using Float.Model;
 using Float.Services;
+using Float.ViewModelMediator;
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -18,12 +16,10 @@ namespace Float.Components.Login
 {
     public class LoginViewModel : BaseViewModel
     {
-        LoginView loginView;
-        GenericErrorMessageViewModel window = new GenericErrorMessageViewModel();
         public LoginViewModel()
         {
-            Initialize();
-            HttpClientHelper.InitializeClient();
+
+            InitializeMembers();
         }
 
         private LoginModel loginModel;
@@ -102,9 +98,13 @@ namespace Float.Components.Login
 
         #region Methods
 
-        private void Initialize()
+        private void InitializeMembers()
         {
             loginModel = new LoginModel();
+
+            Mediator.Instance.Register(this, MediatorMessages.LoginViewModel);
+
+            HttpClientHelper.InitializeClient();
         }
 
         private void SignUp(PasswordBox passwordBox)
@@ -129,46 +129,50 @@ namespace Float.Components.Login
             if (!isEmpty)
                 return;
 
-            MemberService memberService = new MemberService();
-            bool result = memberService.SearchMember(LoginModel.UserUsername, LoginModel.UserPassword);
+            MemberServiceProvider memberService = new MemberServiceProvider();
+            UserAccountModel userAccountModel = new UserAccountModel();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
+            userAccountModel.Username = LoginModel.UserUsername;
+            userAccountModel.Password = LoginModel.UserPassword;
+            try
+            {
+                var result = memberService.AuthenticateUserAsync(userAccountModel, cancellationTokenSource.Token);
+                MainDashboard mainDashboard = new MainDashboard();
+                App.Current.MainWindow.Close();
 
-            ClearFields();
+                mainDashboard.Owner = App.Current.MainWindow;
 
-            MainDashboard mainDashboard = new MainDashboard();
-            App.Current.MainWindow.Close();
-            mainDashboard.Owner = App.Current.MainWindow;
-
-            mainDashboard.ShowDialog();
+                mainDashboard.ShowDialog();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                ShowGenericMessage(ex.Message);
+            }
         }
 
         private async void UserSignUp(object parameter)
         {
             PasswordBox passwordBox = parameter as PasswordBox;
-            MemberService memberService = new MemberService();
-            SignupDataModel signup = new SignupDataModel();
+            MemberServiceProvider memberService = new MemberServiceProvider();
+            SignupModel signup = new SignupModel();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
             signup.Username = LoginModel.UserUsername;
             signup.Password = LoginModel.UserPassword;
 
             try
             {
-                var result = await memberService.RegisterUserAsync(signup);
+                var result = await memberService.RegisterUserAsync(signup, cancellationTokenSource.Token);
 
-                GenericErrorMessageView genericWindow = new GenericErrorMessageView();
-                genericWindow.Owner = App.Current.MainWindow;
-
-                genericWindow.Show();
             }
             catch (Exception ex)
             {
-                GenericErrorMessageView genericWindow = new GenericErrorMessageView();
-                GenericErrorMessageViewModel genericErrorMessageViewModel = new GenericErrorMessageViewModel();
-                genericErrorMessageViewModel.ErrorMessage = ex.Message;
-                genericWindow.ShowDialog();
+                ShowGenericMessage(ex.Message);
             }
-            passwordBox?.Clear();
-            loginModel.UserUsername = string.Empty;
+            //passwordBox?.Clear();
+            //loginModel.UserUsername = string.Empty;
         }
 
         private void ClearFields()

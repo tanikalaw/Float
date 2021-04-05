@@ -184,8 +184,8 @@
                                             BorderThickness="2"
                                             CornerRadius="10">
                                             <ContentControl
-                                                  Width="50"
-                                        Height="50"
+                                                Width="50"
+                                                Height="50"
                                                 Style="{StaticResource GoogleFlat}" />
                                         </Border>
                                     </Button>
@@ -250,8 +250,8 @@
                                 <ImageBrush
                                     AlignmentX="Left"
                                     AlignmentY="Bottom"
-                                    ImageSource="{StaticResource SignUp}" Stretch="Uniform"
-                                    />
+                                    ImageSource="{StaticResource SignUp}"
+                                    Stretch="Uniform" />
                             </Grid.Background>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -305,7 +305,7 @@
                                         <PasswordBox
                                             x:Name="PasswordBoxSignup"
                                             Width="500"
-                                            Height="70" 
+                                            Height="70"
                                             FontSize="25"
                                             Style="{StaticResource PasswordBox1}"
                                             Tag="Enter Password">
