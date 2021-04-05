@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Float.ViewModelMediator
 {
-   public class Messages
+   public class MediatorMessages
     {
         public const string GenericErrorWindow = "GenericErrorWindow";
         public const string GenericErrorViewModel = "GenericErrorViewModel";
         public const string GenericErrorViewModelErrorMessage = "GenericErrorViewModelErrorMessage";
+        public const string LoginViewModel = "LoginViewModel";
+
+        public const string ErrorHandlerViewModel = "ErrorHandlerViewModel";
     }
 }
