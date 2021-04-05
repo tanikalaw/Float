@@ -1,9 +1,9 @@
 ﻿<Window
-    x:Class="Float.GenericErrorMessage.GenericErrorMessageView"
+    x:Class="Float.GenericMessages.GenericErrorMessageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Float.GenericErrorMessage"
+    xmlns:local="clr-namespace:Float.GenericMessages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="GenericErrorMessageView"
     Width="350"
@@ -11,7 +11,8 @@
     AllowsTransparency="True"
     Background="Transparent"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.DataContext>
@@ -30,8 +31,9 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Foreground="Black"
-                    Style="{StaticResource Pharagraph1}"
-                    Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" />
+                    Style="{StaticResource ErrorMessage}"
+                    Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap" />
                 <Button
                     Width="150"
                     Height="50"
