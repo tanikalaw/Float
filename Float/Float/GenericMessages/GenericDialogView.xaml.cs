@@ -17,9 +17,9 @@ namespace Float.GenericMessages
     /// <summary>
     /// Interaction logic for GenericMessageView.xaml
     /// </summary>
-    public partial class GenericMessageView : Window
+    public partial class GenericDialogView : Window
     {
-        public GenericMessageView()
+        public GenericDialogView()
         {
             InitializeComponent();
         }

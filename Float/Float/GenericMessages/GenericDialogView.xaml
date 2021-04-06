@@ -1,0 +1,85 @@
+﻿<Window
+    x:Class="Float.GenericMessages.GenericDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Float.GenericMessages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="GenericDialogView"
+    Width="350"
+    Height="350"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <local:GenericDialogViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Border Background="{StaticResource DARK BLUE}" CornerRadius="25">
+            <Border
+                Width="335"
+                Height="335"
+                Background="White"
+                CornerRadius="25">
+                <Grid>
+                    <ContentControl
+                        Width="120"
+                        Height="120"
+                        Margin="0,30,0,0"
+                        VerticalAlignment="Top">
+                        <ContentControl.Style>
+                            <Style BasedOn="{StaticResource SuccessIcon}" TargetType="{x:Type ContentControl}">
+                                <Setter Property="Visibility" Value="Hidden" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSuccess}" Value="True">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+
+                    <ContentControl
+                        Width="120"
+                        Height="120"
+                        Margin="0,20,0,0"
+                        VerticalAlignment="Top">
+                        <ContentControl.Style>
+                            <Style BasedOn="{StaticResource ErrorIcon}" TargetType="{x:Type ContentControl}">
+                                <Setter Property="Visibility" Value="Hidden" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsError}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <TextBlock
+                        Width="250"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Style="{StaticResource ErrorMessage}"
+                        Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Width="150"
+                        Height="50"
+                        Margin="0,0,0,20"
+                        VerticalAlignment="Bottom"
+                        Background="{StaticResource Color2}"
+                        Command="{Binding CloseWindowCommand}"
+                        Content="Close"
+                        Foreground="White"
+                        Style="{StaticResource ButtonSyleConfirm}" />
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>
