@@ -6,9 +6,14 @@ namespace DataAccess
 {
     public struct ApiRouteAddress
     {
-        public static string GetSignupResource()
+        public static string SignupUserResource()
         {
-            return $"api/v1/post/register";
+            return $"api/v1/user/register";
+        }
+
+        public static string AuthenticateUserResource()
+        {
+            return $"/api/v1/user/authenticate";
         }
     }
 }
