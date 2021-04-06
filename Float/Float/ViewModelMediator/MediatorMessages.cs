@@ -11,6 +11,11 @@ namespace Float.ViewModelMediator
         public const string GenericErrorWindow = "GenericErrorWindow";
         public const string GenericErrorViewModel = "GenericErrorViewModel";
         public const string GenericErrorViewModelErrorMessage = "GenericErrorViewModelErrorMessage";
+
+        public const string GenericMessageViewModel = "GenericMessageViewModel";
+        public const string GenericMessageView = "GenericMessageView";
+        public const string GenericMessage = "GenericMessage";
+
         public const string LoginViewModel = "LoginViewModel";
 
         public const string ErrorHandlerViewModel = "ErrorHandlerViewModel";
