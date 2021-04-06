@@ -9,10 +9,11 @@ namespace Float.DataModels
 {
     public class ApiResponseDataModel
     {
+
+        [JsonProperty("statusCode")]
+        public string StatusCode { get; set; }
+
         [JsonProperty("data")]
         public string Data { get; set; }
-
-        [JsonProperty("message")]
-        public string Message { get; set; }
     }
 }
