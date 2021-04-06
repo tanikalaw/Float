@@ -23,13 +23,16 @@ namespace Float.BaseModel
 
         public async Task ShowGenericMessage(object parameter)
         {
-            GenericErrorMessageView genericErrorMessageView = new GenericErrorMessageView();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                GenericErrorMessageView genericErrorMessageView = new GenericErrorMessageView();
 
-            genericErrorMessageView.Owner = App.Current.MainWindow;
+                genericErrorMessageView.Owner = App.Current.MainWindow;
 
-            Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorViewModelErrorMessage, parameter);
-            Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorWindow, genericErrorMessageView);
-            genericErrorMessageView.ShowDialog();
+                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorViewModelErrorMessage, parameter);
+                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorWindow, genericErrorMessageView);
+                genericErrorMessageView.ShowDialog();
+            });
         }
     }
 }
