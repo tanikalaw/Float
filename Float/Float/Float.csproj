@@ -141,6 +141,11 @@
       <DependentUpon>GenericErrorMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GenericMessages\GenericErrorMessageViewModel.cs" />
+    <Compile Include="GenericMessages\GenericMessageView.xaml.cs">
+      <DependentUpon>GenericMessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericMessages\GenericMessageViewModel.cs" />
+    <Compile Include="Helper\HttpValidationError.cs" />
     <Compile Include="Model\ResponseModel.cs" />
     <Compile Include="Model\SignupModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
@@ -178,6 +183,10 @@
     <Page Include="GenericMessages\GenericErrorMessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="GenericMessages\GenericMessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
