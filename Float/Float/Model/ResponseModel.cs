@@ -10,10 +10,10 @@ namespace Float.Model
     public class ResponseModel
     {
 
+        [JsonProperty("statusCode")]
+        public string StatusCode { get; set; }
+
         [JsonProperty("data")]
         public string Data { get;  set; }
-
-        [JsonProperty("message")]
-        public string Message { get;  set; }
     }
 }
