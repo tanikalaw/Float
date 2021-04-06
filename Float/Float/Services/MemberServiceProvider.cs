@@ -23,7 +23,7 @@ namespace Float.Services
             SignupDataModel signupDataModel = new SignupDataModel();
             ResponseModel responseModel = new ResponseModel();
 
-            using (HttpResponseMessage response = await HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.GetSignupResource(), request))
+            using (HttpResponseMessage response = await HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.SignupUserResource(), request))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -35,43 +35,37 @@ namespace Float.Services
                 }
                 else
                 {
-                    var httpStatusCode = response.StatusCode;
-
                     responseModel = JsonConvert.DeserializeObject<ResponseModel>(response.Content.ReadAsStringAsync().Result);
 
-                    ShowGenericMessage(responseModel.Message);
+                    ShowGenericMessage(responseModel.Data);
 
-                 
-
-                    return signupDataModel;
+                    return null;
                 }
             }
         }
 
         public async Task<UserAccountDataModel> AuthenticateUserAsync(UserAccountModel request, CancellationToken cancellationToken)
         {
-            UserAccountDataModel signupDataModel = new UserAccountDataModel();
+            UserAccountDataModel userAccount;
             _ = new ResponseModel();
 
-            using (HttpResponseMessage response = await HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.GetSignupResource(), request))
+            using (HttpResponseMessage response = await HttpClientHelper.ApiClient.PostAsJsonAsync(ApiRouteAddress.AuthenticateUserResource(), request))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     var httpStatusCode = response.StatusCode;
 
-                    signupDataModel = JsonConvert.DeserializeObject<UserAccountDataModel>(response.Content.ReadAsStringAsync().Result);
+                    userAccount = JsonConvert.DeserializeObject<UserAccountDataModel>(response.Content.ReadAsStringAsync().Result);
 
-                    return signupDataModel;
+                    return userAccount;
                 }
                 else
                 {
-                    var httpStatusCode = response.StatusCode;
-
                     ResponseModel responseModel = JsonConvert.DeserializeObject<ResponseModel>(response.Content.ReadAsStringAsync().Result);
 
-                    ShowGenericMessage(responseModel.Message);
+                    ShowGenericMessage(responseModel.Data);
 
-                    return signupDataModel;
+                    return null;
                 }
             }
         }
