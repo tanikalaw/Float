@@ -122,7 +122,7 @@ namespace Float.Components.Login
         }
 
 
-        private void UserLogin()
+        private async void UserLogin()
         {
             var isEmpty = ValidateFields(LoginModel.UserUsername, LoginModel.UserPassword);
 
@@ -137,14 +137,18 @@ namespace Float.Components.Login
             userAccountModel.Password = LoginModel.UserPassword;
             try
             {
-                var result = memberService.AuthenticateUserAsync(userAccountModel, cancellationTokenSource.Token);
-                MainDashboard mainDashboard = new MainDashboard();
-                App.Current.MainWindow.Close();
+                var result = await memberService.AuthenticateUserAsync(userAccountModel, cancellationTokenSource.Token);
 
-                mainDashboard.Owner = App.Current.MainWindow;
+                if (result != null)
+                {
+                    MainDashboard mainDashboard = new MainDashboard();
+                    App.Current.MainWindow.Close();
 
-                mainDashboard.ShowDialog();
-                ClearFields();
+                    mainDashboard.Owner = App.Current.MainWindow;
+
+                    mainDashboard.ShowDialog();
+                    ClearFields();
+                }
             }
             catch (Exception ex)
             {
@@ -164,7 +168,17 @@ namespace Float.Components.Login
 
             try
             {
-                var result = await memberService.RegisterUserAsync(signup, cancellationTokenSource.Token);
+                var signupDataModel = await memberService.RegisterUserAsync(signup, cancellationTokenSource.Token);
+
+                if(signupDataModel != null)
+                {
+                    GenericMessageView view = new GenericMessageView();
+                    Mediator.Instance.NotifyViewModel(MediatorMessages.GenericMessageViewModel, MediatorMessages.GenericMessageView, view);
+                    Mediator.Instance.NotifyViewModel(MediatorMessages.GenericMessageViewModel, MediatorMessages.GenericMessage, "Successfuly created your account.");
+                    view.Owner = App.Current.MainWindow;
+                    view.ShowDialog();
+
+                }
 
             }
             catch (Exception ex)
