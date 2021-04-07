@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace Float.BaseModel
 
         public virtual void SendData(string message, object args) { }
 
-        protected void RaisedPropertyChanged(string propertyName)
+        protected void RaisedPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -25,12 +26,12 @@ namespace Float.BaseModel
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-                GenericErrorMessageView genericErrorMessageView = new GenericErrorMessageView();
+                GenericDialogView genericErrorMessageView = new GenericDialogView();
 
                 genericErrorMessageView.Owner = App.Current.MainWindow;
-
-                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorViewModelErrorMessage, parameter);
-                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericErrorViewModel, MediatorMessages.GenericErrorWindow, genericErrorMessageView);
+                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericDialogViewModel, MediatorMessages.GenericDialogView, genericErrorMessageView);
+                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericDialogViewModel, MediatorMessages.GenericDialogMessage, parameter);
+                Mediator.Instance.NotifyViewModel(MediatorMessages.GenericDialogViewModel, MediatorMessages.GenericDialogError);
                 genericErrorMessageView.ShowDialog();
             });
         }
