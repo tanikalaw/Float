@@ -211,4 +211,55 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+    <Style x:Key="ErrorIcon" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Stretch="Uniform">
+                        <Grid>
+                            <Path Data="M446.324,367.381L262.857,41.692c-15.644-28.444-58.311-28.444-73.956,0L5.435,367.381  c-15.644,28.444,4.267,64,36.978,64h365.511C442.057,429.959,461.968,395.825,446.324,367.381z" Fill="#E24C4B" />
+                            <Path Data="M225.879,63.025l183.467,325.689H42.413L225.879,63.025L225.879,63.025z" Fill="#ffff" />
+                            <Path Data="M196.013,212.359l11.378,75.378c1.422,8.533,8.533,15.644,18.489,15.644l0,0   c8.533,0,17.067-7.111,18.489-15.644l11.378-75.378c2.844-18.489-11.378-34.133-29.867-34.133l0,0   C207.39,178.225,194.59,193.87,196.013,212.359z" Fill="#3F4448" />
+                            <Path Fill="#3F4448">
+                                <Path.Data>
+                                    <EllipseGeometry
+                                        Center="225,335"
+                                        RadiusX="20"
+                                        RadiusY="20" />
+                                </Path.Data>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SuccessIcon" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Viewbox
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Stretch="Uniform">
+                        <Grid>
+                            <Path Data="M437.016,74.984c-99.979-99.979-262.075-99.979-362.033,0.002c-99.978,99.978-99.978,262.073,0.004,362.031     c99.954,99.978,262.05,99.978,362.029-0.002C536.995,337.059,536.995,174.964,437.016,74.984z M406.848,406.844     c-83.318,83.318-218.396,83.318-301.691,0.004c-83.318-83.299-83.318-218.377-0.002-301.693     c83.297-83.317,218.375-83.317,301.691,0S490.162,323.549,406.848,406.844z" Fill="#15C39A" />
+                            <Path Data="M368.911,155.586L234.663,289.834l-70.248-70.248c-8.331-8.331-21.839-8.331-30.17,0s-8.331,21.839,0,30.17     l85.333,85.333c8.331,8.331,21.839,8.331,30.17,0l149.333-149.333c8.331-8.331,8.331-21.839,0-30.17     S377.242,147.255,368.911,155.586z" Fill="#3F4448" />
+
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
