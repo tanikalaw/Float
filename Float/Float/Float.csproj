@@ -137,14 +137,10 @@
     <Compile Include="DataModels\ApiResponseDataModel.cs" />
     <Compile Include="DataModels\SignupDataModel.cs" />
     <Compile Include="DataModels\UserAccountDataModel.cs" />
-    <Compile Include="GenericMessages\GenericErrorMessageView.xaml.cs">
-      <DependentUpon>GenericErrorMessageView.xaml</DependentUpon>
+    <Compile Include="GenericMessages\GenericDialogView.xaml.cs">
+      <DependentUpon>GenericDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GenericMessages\GenericErrorMessageViewModel.cs" />
-    <Compile Include="GenericMessages\GenericMessageView.xaml.cs">
-      <DependentUpon>GenericMessageView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GenericMessages\GenericMessageViewModel.cs" />
+    <Compile Include="GenericMessages\GenericDialogViewModel.cs" />
     <Compile Include="Helper\HttpValidationError.cs" />
     <Compile Include="Model\ResponseModel.cs" />
     <Compile Include="Model\SignupModel.cs" />
@@ -180,11 +176,7 @@
     </Compile>
     <Compile Include="Component\Dashboard\MainDashboardViewModel.cs" />
     <Compile Include="Helper\Converter.cs" />
-    <Page Include="GenericMessages\GenericErrorMessageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="GenericMessages\GenericMessageView.xaml">
+    <Page Include="GenericMessages\GenericDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
